@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     dockerImage = ''
-    registry = '1781043/docker-jenkins'
+    registry = 'flask'
   }
   stages {
     stage('Build Docker Image') {
