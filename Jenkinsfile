@@ -1,11 +1,12 @@
 pipeline {
   agent any
+  environment {
+    dockerImage = ''
+    registry = '1781043/docker-jenkins'
+  }
   stages {
-    stage('build') {
-      steps {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/uday1921/flask.git']]])
-      }
+    stage('Build Docker Image') {
+      dockerImage =  docker.build registry
     }
-
   }
 }
