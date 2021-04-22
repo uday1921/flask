@@ -9,6 +9,7 @@ pipeline {
       steps {
         script {
       dockerImage =  docker.build registry
+          bat "${dockerImage}"
     }
       }
     }
