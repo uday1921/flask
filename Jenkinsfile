@@ -9,7 +9,7 @@ pipeline {
       steps {
         script {
       dockerImage =  docker.build registry
-          bat "${BUILD_NUMBER}"
+          bat "echo ${BUILD_NUMBER}"
     }
       }
     }
