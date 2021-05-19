@@ -12,17 +12,12 @@ pipeline {
     }
       }
     }
-    stage('mannuel approval') {
+    stage('mannuel approval to deploy p]images to kubernetes') {
       steps {
         script {
            input message: 'User input required'
+          echo "uday kumar......"
         }
-    }
-    }
-    stage("display message")
-    {
-      steps {
-      echo "uday kumar......"
     }
     }
     }
