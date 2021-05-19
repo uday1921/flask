@@ -13,6 +13,7 @@ pipeline {
         }
         stage('Testing for mail Approval') {
             steps {
+                script{
                     def email = "udaykumar.gorrepati123@gmail.com"
                     def userAborted = false
                     emailext body: '''
@@ -27,8 +28,8 @@ pipeline {
                         userInput = input submitter: 'udaykumar', message: 'Do you approve?'
                     }
                     catch (e) {
-                        def currentAborter = e.getCauses()[0].getUser().toString()
-                        echo "Aborted by  ${currentAborter}" 
+                        def urrentAborter = e.getCausees()[0].getUser().toString()
+                        echo "Aborted by  "+ cause.getUser.toString()
                         userAborted = true
                         echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
                     }
@@ -38,7 +39,7 @@ pipeline {
                     else {
                         echo "continue to  next stage in piprline."
                     }
-                
+                }
             }
         }
     }
