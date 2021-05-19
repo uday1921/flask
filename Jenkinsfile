@@ -2,9 +2,6 @@ pipeline {
   agent any
   environment {
     dockerImage = ''
-    def toemialid = "udaykumar.gorrepati123@gmail.com"
-    def fromemialid = "udaykumar.gorrepati123@gmail.com"
-    def 
     registry = 'flask'
   }
   stages {
@@ -16,17 +13,16 @@ pipeline {
       }
     }
     stage('mannuel approval to deploy p]images to kubernetes') {
-      steps {
         script {
-          def userAborted = false
-          emialtext body: ''' please goto to console output of ${BUILD_URL} to approve or reject.<br>''',
-          mimeType: 'text/html',
+          def email = "udaykumar.gorrepati123@gmail.com"
+          emialtext (
+            to: "${email}"
+            body: "please goto to console output of ${env.BUILD_URL} to approve or reject",
           subject: "[jenkins] ${env.JOB_NAME} Build Approval Request..",
-          from: "${fromemialid}",
-          to: "${fromemialid}",
-          recipientProviders: [[$class: 'CuipritsRecipientProvider']]
+          recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
         }
         }
-    }
+
     }
     }
