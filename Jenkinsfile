@@ -1,3 +1,5 @@
+import org.jenkinsci.plugins.workflow.support.steps.input.Rejection.*;
+
 pipeline {
     agent any
     environment {
