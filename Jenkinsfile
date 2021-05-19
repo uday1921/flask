@@ -13,7 +13,6 @@ pipeline {
         }
         stage('Testing for mail Approval') {
             steps {
-                script {
                     def email = "udaykumar.gorrepati123@gmail.com"
                     def userAborted = false
                     emailext body: '''
@@ -25,9 +24,9 @@ pipeline {
                     recipientProviders: [[$class: 'DevelopersRecipientProvider']]
 
                     try {
-                        userInput = input submitter: 'vagrant', message: 'Do you approve?'
+                        userInput = input submitter: 'udaykumar', message: 'Do you approve?'
                     }
-                    catch (Exception e) {
+                    catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e) {
                         cause = e.causes.get(0)
                         echo "Aborted by  "+ cause.getUser.toString()
                         userAborted = true
@@ -39,7 +38,7 @@ pipeline {
                     else {
                         echo "continue to  next stage in piprline."
                     }
-                }
+                
             }
         }
     }
