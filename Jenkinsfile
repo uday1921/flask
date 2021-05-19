@@ -26,8 +26,8 @@ pipeline {
                     try {
                         userInput = input submitter: 'udaykumar', message: 'Do you approve?'
                     }
-                    catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e) {
-                        cause = e.causes.get(0)
+                    catch (e) {
+                        def urrentAborter = e.getCausees()[0].getUser().toString()
                         echo "Aborted by  "+ cause.getUser.toString()
                         userAborted = true
                         echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
