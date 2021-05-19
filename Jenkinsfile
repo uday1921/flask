@@ -18,6 +18,7 @@ pipeline {
                 script{
                     def email = "udaykumar.gorrepati123@gmail.com"
                     def userApproved = false
+                    def nextstage=false
                     emailext body: '''
                     please goto console outout of ${BUILD_URl} input to Approve or Reject.<br>
                     ''',
@@ -29,25 +30,29 @@ pipeline {
                     try {
                         userInput = input submitter: 'udaykumar', message: 'Do you approve?'
                         userApproved = true
+                        nextstage=true
+                        
                     }
                      finally {
                          if(!userApproved) {
                             //def urrentAborter = e.getCauses()[0].getUser().toString()
                             //echo "Aborted by  "+ cause.getUser.toString()
                             def userAborted = true
+                            nextstage=true
                             echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
                          }
-                    }
-                    when
-                    {
-                        expression{userApproved==false}
-                        return after
                     }
                 }
             }
         }
         stage("after")
         {
+            
+            when
+            {
+                expression{nextstage==true}
+                return after
+            }
             steps
             {
                 script
