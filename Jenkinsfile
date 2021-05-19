@@ -14,6 +14,7 @@ pipeline {
       }
     }
     stage('mannuel approval') {
+      steps {
       input {
         message "approve stage?"
       }
@@ -21,6 +22,7 @@ pipeline {
     stage("display message")
     {
       echo "uday kumar......"
+    }
     }
   }
 }
