@@ -24,10 +24,10 @@ pipeline {
                             body: '''Please click on URL ${BUILD_URL} to check..<br>''',
                             mimeType: 'text/html',
                             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                            )
                             try {
                                 def userinput = input submitter: 'vagrant', message: 'Do you want to approve?'
                             }
-                        )
                     }
                 }
             }
