@@ -21,8 +21,8 @@ pipeline {
           emialtext body: ''' please goto to console output of ${BUILD_URL} to approve or reject.<br>''',
           mimeType: 'text/html',
           subject: "[jenkins] ${env.JOB_NAME} Build Approval Request..",
-          from: ${fromemialid},
-          to: ${fromemialid},
+          from: "${fromemialid}",
+          to: "${fromemialid}",
           recipientProviders: [[$class: 'CuipritsRecipientProvider']]
           
           try {
