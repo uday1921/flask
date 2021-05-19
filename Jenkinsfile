@@ -21,7 +21,9 @@ pipeline {
     }
     stage("display message")
     {
+      steps {
       echo "uday kumar......"
+    }
     }
     }
   }
