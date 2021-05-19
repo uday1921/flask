@@ -38,16 +38,15 @@ pipeline {
                             echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
                          }
                     }
-                    if(!userApproved) {
-                        currentBuild.result = 'ABORTED'
-                    }
-                    else {
-                         currentBuild.result = 'SUCCESS'
+                    when
+                    {
+                        expression{userApproved==false}
+                        return after
                     }
                 }
             }
         }
-        stage("after aborting test")
+        stage("after")
         {
             steps
             {
