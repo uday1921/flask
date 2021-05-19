@@ -13,5 +13,12 @@ pipeline {
     }
       }
     }
+    stage('mannuel approval') {
+      input "approve stage?"
+    }
+    stage("display message")
+    {
+      echo "uday kumar......"
+    }
   }
 }
