@@ -19,7 +19,7 @@ pipeline {
       steps {
         script {
           def userAborted = false
-          emialtext body: ''' please goto to console output of ${BUILD_URL} to approve or reject.<br>'''
+          emialtext body: ''' please goto to console output of ${BUILD_URL} to approve or reject.<br>''',
           mimeType: 'text/html',
           subject: "[jenkins] ${env.JOB_NAME} Build Approval Request..",
           from: ${fromemialid},
