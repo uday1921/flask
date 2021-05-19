@@ -16,9 +16,10 @@ pipeline {
         script {
           def email = "udaykumar.gorrepati123@gmail.com"
           emialtext (
-            to: "${email}"
+            to: "${email}",
+            subject: "[jenkins] ${env.JOB_NAME} Build Approval Request..",
             body: "please goto to console output of ${env.BUILD_URL} to approve or reject",
-          subject: "[jenkins] ${env.JOB_NAME} Build Approval Request..",
+          
           recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
