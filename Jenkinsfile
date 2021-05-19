@@ -13,6 +13,7 @@ pipeline {
       }
     }
     stage('mannuel approval to deploy p]images to kubernetes') {
+      steps {
         script {
           def email = "udaykumar.gorrepati123@gmail.com"
           emialtext (
@@ -24,6 +25,7 @@ pipeline {
             )
         }
         }
+    }
 
     }
     }
