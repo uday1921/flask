@@ -27,8 +27,8 @@ pipeline {
                         userInput = input submitter: 'udaykumar', message: 'Do you approve?'
                     }
                     catch (e) {
-                        def urrentAborter = e.getCausees()[0].getUser().toString()
-                        echo "Aborted by  "+ cause.getUser.toString()
+                        def currentAborter = e.getCauses()[0].getUser().toString()
+                        echo "Aborted by  ${currentAborter}" 
                         userAborted = true
                         echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
                     }
