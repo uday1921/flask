@@ -14,7 +14,9 @@ pipeline {
       }
     }
     stage('mannuel approval') {
-      input "approve stage?"
+      input {
+        message "approve stage?"
+      }
     }
     stage("display message")
     {
