@@ -28,6 +28,9 @@ pipeline {
                             try {
                                 def userinput = input submitter: 'vagrant', message: 'Do you want to approve?'
                             }
+                        fimally {
+                            echo "executing finally blok....."
+                        }
                     }
                 }
             }
