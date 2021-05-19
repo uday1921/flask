@@ -19,6 +19,7 @@ pipeline {
         message "approve stage?"
       }
     }
+    }
     stage("display message")
     {
       steps {
@@ -27,4 +28,3 @@ pipeline {
     }
     }
   }
-}
