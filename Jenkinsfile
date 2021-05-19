@@ -15,7 +15,7 @@ pipeline {
     stage('mannuel approval') {
       steps {
         script {
-          env.TAG_ON_DOCKER_HUB = input message: 'User input required',
+           input message: 'User input required'
         }
     }
     }
