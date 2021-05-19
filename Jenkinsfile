@@ -34,11 +34,11 @@ pipeline {
                          if(!userApproved) {
                             //def urrentAborter = e.getCauses()[0].getUser().toString()
                             //echo "Aborted by  "+ cause.getUser.toString()
-                            userAborted = true
+                            def userAborted = true
                             echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
                          }
                     }
-                    if(userApproved) {
+                    if(userAborted) {
                         currentBuild.result = 'ABORTED'
                     }
                     else {
