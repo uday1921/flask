@@ -18,6 +18,12 @@ pipeline {
                     script 
                     {
                         def email = "udaykumar.gorrepati123@gmail.com"
+                        try {
+                            def userinput = input submitter: 'vagrant', message: 'Do you want to approve?'
+                            }
+                        finally {
+                            echo "executing Finally Block........"
+                        }
                         emailext (
                             to: "${email}",
                             subject: "In post Stage....",
@@ -25,12 +31,6 @@ pipeline {
                             mimeType: 'text/html',
                             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
                         )
-                        try {
-                            def userinput = input submitter: 'vagrant', message: 'Do you want to approve?'
-                            }
-                        finally {
-                            echo "executing Finally Block........"
-                        }
                     }
                 }
             }
