@@ -17,6 +17,7 @@ pipeline {
     }
     stage('mannuel approval to deploy p]images to kubernetes') {
       steps {
+        script {
           def userAborted = false
           emialtext body: ''' please goto to console output of ${BUILD_URL} to approve or reject.<br>''',
           mimeType: 'text/html',
@@ -24,7 +25,7 @@ pipeline {
           from: "${fromemialid}",
           to: "${fromemialid}",
           recipientProviders: [[$class: 'CuipritsRecipientProvider']]
-         
+        }
         }
     }
     }
