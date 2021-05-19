@@ -18,7 +18,6 @@ pipeline {
                 script{
                     def email = "udaykumar.gorrepati123@gmail.com"
                     def userApproved = false
-                    def 
                     emailext body: '''
                     please goto console outout of ${BUILD_URl} input to Approve or Reject.<br>
                     ''',
