@@ -17,7 +17,8 @@ pipeline {
             steps {
                 script{
                     def email = "udaykumar.gorrepati123@gmail.com"
-                    def userAborted = false
+                    def userApproved = false
+                    def 
                     emailext body: '''
                     please goto console outout of ${BUILD_URl} input to Approve or Reject.<br>
                     ''',
@@ -28,14 +29,17 @@ pipeline {
 
                     try {
                         userInput = input submitter: 'udaykumar', message: 'Do you approve?'
+                        userApproved = true
                     }
-                    catch (e) {
-                        def urrentAborter = e.getCauses()[0].getUser().toString()
-                        echo "Aborted by  "+ cause.getUser.toString()
-                        userAborted = true
-                        echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
+                     finally {
+                         if(!userApproved) {
+                            //def urrentAborter = e.getCauses()[0].getUser().toString()
+                            //echo "Aborted by  "+ cause.getUser.toString()
+                            userAborted = true
+                            echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
+                         }
                     }
-                    if(userAborted) {
+                    if(userApproved) {
                         currentBuild.result = 'ABORTED'
                     }
                     else {
