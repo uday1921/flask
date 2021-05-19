@@ -47,5 +47,15 @@ pipeline {
                 }
             }
         }
+        stage("after aborting test")
+        {
+            steps
+            {
+                script
+                {
+                    echo "uday kumar gorrepati"
+                }
+            }
+        }
     }
 }
