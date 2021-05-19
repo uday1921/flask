@@ -38,11 +38,11 @@ pipeline {
                             echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
                          }
                     }
-                    if(userAborted) {
+                    if(!userApproved) {
                         currentBuild.result = 'ABORTED'
                     }
                     else {
-                        echo "continue to  next stage in piprline."
+                         currentBuild.result = 'SUCCESS'
                     }
                 }
             }
