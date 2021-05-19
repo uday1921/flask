@@ -29,6 +29,7 @@ pipeline {
 
                     try {
                         userInput = input submitter: 'udaykumar', message: 'Do you approve?'
+                        echo "${userInput}"
                         userApproved = true
                         nextstage=true
                         
@@ -37,6 +38,7 @@ pipeline {
                          if(!userApproved) {
                             //def urrentAborter = e.getCauses()[0].getUser().toString()
                             //echo "Aborted by  "+ cause.getUser.toString()
+                             echo "${userInput}"
                             def userAborted = true
                             nextstage=true
                             echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
@@ -47,12 +49,6 @@ pipeline {
         }
         stage("after")
         {
-            
-            when
-            {
-                expression{nextstage==true}
-                return after
-            }
             steps
             {
                 script
