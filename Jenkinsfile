@@ -18,8 +18,7 @@ pipeline {
                     script 
                     {
                         def email = "udaykumar.gorrepati123@gmail.com"
-                        emailext 
-                        (
+                        emailext (
                             to: "${email}",
                             subject: "In post Stage....",
                             body: "Please click on URL ${BUILD_URL} to check..",
