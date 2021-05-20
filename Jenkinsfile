@@ -25,7 +25,8 @@ pipeline {
                     myStage = input message: 'What stage do you want to deploy COntainers to cluster?', parameters: [choice(choices: 'YES\nNo', description: '', name: 'Stage')]
                     if(myStage == 'No') {
                     echo 'Skipping Deployment and Deleting Cluster Stage.'
-                    currentBuild.result = "ABORTED."
+                     def reasonforAbortion = input(message:"Reason for Abortion", parameters;[[$class: 'TextParameterDefinition', defaultValue: 'Your Reason', description: 'Reason for Rejection',name: 'aText']], ok: 'Go Ahead ');
+                    currentBuild.result = 'ABORTED'
                 }
 
 
