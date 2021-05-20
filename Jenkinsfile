@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    myStage = input message: 'What stage do you want to run now?', parameters: [choice(choices: 'Stage1\nStage2\nStage3', description: '', name: 'Stage')]
+                    myStage = input message: 'What stage do you want to approve Deployment stage?', parameters: [choice(choices: 'Yes/No', description: '', name: 'Stage')]
                 }
                 echo myStage
             }
@@ -20,26 +20,20 @@ pipeline {
 
         stage('Stage1') {
             when {
-                expression { myStage == 'Stage1' }
+                expression { myStage == 'Yes' }
             }
             steps {
-                echo "Running Stage1"
+                echo "Running deployment"
             }
         }
 
         stage('Stage2') {
-            when {
-                expression { myStage == 'Stage2' }
-            }
             steps {
                 echo "Running Stage2"
             }
         }
 
         stage('Stage3') {
-            when {
-                expression { myStage == 'Stage3' }
-            }
             steps {
                 echo "Running Stage3"
             }
