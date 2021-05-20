@@ -12,30 +12,42 @@ pipeline {
             agent any
             steps {
                 script {
-                    myStage = input message: 'What stage do you want to approve Deployment stage?', parameters: [choice(choices: 'Yes\nNo', description: '', name: 'Stage')]
+
+                    def email = "udaykumar.gorrepati123@gmil.com"
+                    emailext body: ''' Please goto the The URl ${BUILD_URL} to Approve or Abort the Deployment of containers to cluster..<br><br>
+                                    Remain in page to Confirm To delete cluster or not.<br>
+                                    ''',
+                            mimeType: 'text/html',
+                            subject: "[Jenkins] ${env.JOB_NAME} to approve or Reject Deployment Stage...",
+                            to: "${email}"
+                            recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+
+                    myStage = input message: 'What stage do you want to deploy COntainers to cluster?', parameters: [choice(choices: 'YES\nNo', description: '', name: 'Stage')]
+
+
                 }
-                echo myStage
+                if(myStage==None)
+                {
+                    echo 'Skipping Deployment and Deleting Cluster Stage.'
+                }
             }
         }
 
-        stage('Stage1') {
+        stage('Deployment') {
             when {
                 expression { myStage == 'Yes' }
             }
             steps {
-                echo "Running deployment"
+                echo "Running Stage1"
             }
         }
 
-        stage('Stage2') {
-            steps {
-                echo "Running Stage2"
+        stage('Deleting the cluster') {
+            when {
+                expression { myStage == 'Yes' }
             }
-        }
-
-        stage('Stage3') {
             steps {
-                echo "Running Stage3"
+                echo "Deleting Cluster"
             }
         }
 
