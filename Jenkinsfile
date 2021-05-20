@@ -23,8 +23,7 @@ pipeline {
                             recipientProviders: [[$class: 'DevelopersRecipientProvider']]
 
                     myStage = input message: 'What stage do you want to deploy COntainers to cluster?', parameters: [choice(choices: 'YES\nNo', description: '', name: 'Stage')]
-                    if(myStage==No)
-                {
+                    if(myStage==No) {
                     echo 'Skipping Deployment and Deleting Cluster Stage.'
                 }
 
@@ -36,7 +35,7 @@ pipeline {
 
         stage('Deployment') {
             when {
-                expression { myStage == 'Yes' }
+                expression { myStage == 'YES' }
             }
             steps {
                 echo "Running Stage1"
@@ -45,7 +44,7 @@ pipeline {
 
         stage('Deleting the cluster') {
             when {
-                expression { myStage == 'Yes' }
+                expression { myStage == 'YES' }
             }
             steps {
                 echo "Deleting Cluster"
