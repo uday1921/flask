@@ -1,61 +1,49 @@
-import org.jenkinsci.plugins.workflow.support.steps.input.Rejection.*;
-
 pipeline {
     agent any
-    environment {
-        def job_name = "${JOB_NAME}"
-    }
-    stages {
-        stage('BUILD'){
-            steps {
-                script{
-                    echo "BUILDING DONE";
-                }
-            }
-        }
-        stage('Testing for mail Approval') {
-            steps {
-                script{
-                    def email = "udaykumar.gorrepati123@gmail.com"
-                    def userApproved = false
-                    def nextstage=false
-                    emailext body: '''
-                    please goto console outout of ${BUILD_URl} input to Approve or Reject.<br>
-                    ''',
-                    mimeType: 'text/html',
-                    subject: "[Jenkins] ${job_name} Build Approval Request.",
-                    to: "${email}"
-                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
 
-                    try {
-                        userInput = input submitter: 'udaykumar', message: 'Do you approve?'
-                        echo "${userInput}"
-                        userApproved = true
-                        nextstage=true
-                        
-                    }
-                     finally {
-                         if(!userApproved) {
-                            //def urrentAborter = e.getCauses()[0].getUser().toString()
-                            //echo "Aborted by  "+ cause.getUser.toString()
-                             echo "${userInput}"
-                            def userAborted = true
-                            nextstage=true
-                            echo "System Aborted but it looks like timeout Period Didn't Compllete. Aborting......."
-                         }
-                    }
-                }
+    stages {
+        stage ('First') {
+            agent any
+            steps {
+                echo "First dummy stage"
             }
         }
-        stage("after")
-        {
-            steps
-            {
-                script
-                {
-                    echo "uday kumar gorrepati"
+        stage ('Input') {
+            agent any
+            steps {
+                script {
+                    myStage = input message: 'What stage do you want to run now?', parameters: [choice(choices: 'Stage1\nStage2\nStage3', description: '', name: 'Stage')]
                 }
+                echo myStage
             }
         }
+
+        stage('Stage1') {
+            when {
+                expression { myStage == 'Stage1' }
+            }
+            steps {
+                echo "Running Stage1"
+            }
+        }
+
+        stage('Stage2') {
+            when {
+                expression { myStage == 'Stage2' }
+            }
+            steps {
+                echo "Running Stage2"
+            }
+        }
+
+        stage('Stage3') {
+            when {
+                expression { myStage == 'Stage3' }
+            }
+            steps {
+                echo "Running Stage3"
+            }
+        }
+
     }
 }
