@@ -25,6 +25,7 @@ pipeline {
                     myStage = input message: 'What stage do you want to deploy COntainers to cluster?', parameters: [choice(choices: 'YES\nNo', description: '', name: 'Stage')]
                     if(myStage==No) {
                     echo 'Skipping Deployment and Deleting Cluster Stage.'
+                    currentBuild.result = "ABORTED."
                 }
 
 
