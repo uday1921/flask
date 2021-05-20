@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    myStage = input message: 'What stage do you want to approve Deployment stage?', parameters: [choice(choices: 'Yes\No', description: '', name: 'Stage')]
+                    myStage = input message: 'What stage do you want to approve Deployment stage?', parameters: [choice(choices: 'Yes\nNo', description: '', name: 'Stage')]
                 }
                 echo myStage
             }
