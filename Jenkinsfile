@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
 
-                    def email = "udaykumar.gorrepati123@gmil.com"
+                    def email = "udaykumar.gorrepati123@gmail.com"
                     emailext body: ''' Please goto the The URl ${BUILD_URL} to Approve or Abort the Deployment of containers to cluster..<br><br>
                                     Remain in page to Confirm To delete cluster or not.<br>
                                     ''',
