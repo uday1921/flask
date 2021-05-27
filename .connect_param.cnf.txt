@@ -1,3 +1,3 @@
 [details]
 name=uday
-surnaame=gorrepati
+surname=gorrepati
