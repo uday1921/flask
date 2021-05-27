@@ -17,3 +17,4 @@ def sendmail()
     from: 'Jenkins <noreply@gmail.com>'
     replyTo: 'no Reply'
 }
+return this
