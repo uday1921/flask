@@ -1,0 +1,3 @@
+[details]
+name=uday
+surnaame=gorrepati
