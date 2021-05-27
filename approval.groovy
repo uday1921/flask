@@ -1,4 +1,4 @@
-import org.ini4j.ini4j
+import org.ini4j.Ini
 
 def approvalStage()
 {
