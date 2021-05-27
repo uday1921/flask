@@ -8,7 +8,7 @@ def approvalStage()
 }
 def sendmail()
 {
-    mail bcc:'',
+    emailext bcc:'',
     subject: 'groovy',
     to: 'udaykumar.gorrepati123@gmail.com',
     mimeType: 'text/html',
