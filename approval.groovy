@@ -12,9 +12,6 @@ def sendmail()
     subject: 'groovy',
     to: 'udaykumar.gorrepati123@gmail.com',
     mimeType: 'text/html',
-    body: "goto ${BUILD_URL}  to approve stahe",
-    cc: '',
-    from: 'Jenkins <noreply@gmail.com>'
-    replyTo: 'no Reply'
+    body: "goto ${BUILD_URL}  to approve stahe"
 }
 return this
