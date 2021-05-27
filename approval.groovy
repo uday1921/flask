@@ -20,7 +20,7 @@ def sendmail()
 }
 def creds(key,value)
 {
-    def detailcreds = load Ini(new FileInputStream(".connect_param.cnf.txt"));
+    def detailcreds = load Ini(new FileInputStream("kk.txt"));
     return detailcreds.get(key,value);
 }
 return this
