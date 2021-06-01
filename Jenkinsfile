@@ -5,9 +5,10 @@ pipeline {
         {
             steps {
                 script {
-                    def approval = load("approval.groovy")
-                    approval.approvalStage()
-                    echo 'successful....'
+                    
+                    def path = JENKINS_HOME.replace("\\","/")
+                    def approval = load("${path}/workspacr/Groovyscripts/test.groovy")
+                    approval.check()
                 }
             }
         }
