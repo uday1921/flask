@@ -9,7 +9,7 @@ pipeline {
                     def path = JENKINS_HOME.replace("\\","/")
                     def approval = load("${JENKINS_HOME}/workspace/GroovyScripts/test.groovy")
                     approval.check()
-                    sleep 20
+                    echo "${c}"
                 }
             }
         }
