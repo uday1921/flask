@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     
+                    echo "${JENKINS_URL}"
                     def path = JENKINS_HOME.replace("\\","/")
                     def approval = load("${JENKINS_HOME}/workspace/GroovyScripts/test.groovy")
                     approval.check()
