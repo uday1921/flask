@@ -1,0 +1,11 @@
+[ldap]
+url=ldap://ids-test.mot-solutions.com:389/
+
+arbgroup=rpajenkinsarb
+admingroup=rpajenkinsadmin
+uatgroup=rpajenkinsuat
+developergroup=rpajenkinsdev
+releasergroup=rpajenkinsfinalrel
+ldapEntryFile=C:/Users/BOT100/AppData/Local/Jenkins.jenkins/workspace/otherFiles/output.txt
+
+ou=groups,ou=unlokjenkins,ou=applications,ou=intranet,dc=motorola,dc=com
