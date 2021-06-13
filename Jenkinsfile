@@ -26,8 +26,7 @@ pipeline {
     FINAL_APPROVAL_STATUS = 'status'
     CODE_REVIEW_APPROVAL_STATUS='status'
     LDAP_URL = Cred("ldap","url").toString().trim()
-    LDAP_DN = Cred("ldap","groupdn").toString().trim()
-    instance="null"
+    userinfo="null"
     
   }
 
@@ -35,8 +34,12 @@ pipeline {
      stage('code Review Stage'){
 	steps {
 		script {
+			echo "${LDAP_URL}"
+			echo "${DEVELOPERGRP}"
+			echo "${ADMINGROUP}"
+			echo "${BITBUCKET_URL}"
 			echo "code review stage is starting"
-			def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/codereviewapproval.groovy")
+			def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/code.groovy")
 			codereview.codereviewstage()	
 			}
 		}
@@ -65,7 +68,7 @@ pipeline {
       steps {
         script {
           echo "Initialization stage is starting."
-          def Intialization = load("${JENKINS_HOME}/workspace/GroovyScripts/intialization.groovy")
+          def Intialization = load("${JENKINS_HOME}/workspace/GroovyScripts/init.groovy")
            Intialization.intializationstage()
         }
       }
@@ -92,10 +95,6 @@ pipeline {
       steps {
         script {
           echo "creating images."
-          dockerImage1 = docker.build(registry1, "-f ${admin_dockerfile} .")
-          dockerImage2 = docker.build(registry2, "-f ${projects_dockerfile} .")
-          dockerImage3 = docker.build(registry3, "-f ${template_dockerfile} .")
-          dockerImage4 = docker.build(registry4, "-f ${workflow_dockerfile} .")
           echo "images creation is done."
         }
       }
@@ -104,10 +103,6 @@ pipeline {
       steps {
         script {
           echo "Tagging Images to repository."
-          sh "sudo docker tag ${registry1} docker.mot-solutions.com/msi/unlok-dev/${registry1}"
-          sh "sudo docker tag ${registry2} docker.mot-solutions.com/msi/unlok-dev/${registry2}"
-          sh "sudo docker tag ${registry3} docker.mot-solutions.com/msi/unlok-dev/${registry3}"
-          sh "sudo docker tag ${registry4} docker.mot-solutions.com/msi/unlok-dev/${registry4}"
           echo "Tagging Images is Done."
         }
       }
@@ -116,10 +111,6 @@ pipeline {
       steps {
         script {
           echo "pushing images to Jfrog Artifactory."
-          sh "sudo docker push docker.mot-solutions.com/msi/unlok-dev/${registry1}"
-          sh "sudo docker push docker.mot-solutions.com/msi/unlok-dev/${registry2}"
-          sh "sudo docker push docker.mot-solutions.com/msi/unlok-dev/${registry3}"
-          sh "sudo docker push docker.mot-solutions.com/msi/unlok-dev/${registry4}"
           echo "Pushing images to Artifactory Done."
         }
       }
@@ -141,7 +132,7 @@ stage('Dev Approval stage') {
 	steps {
 		script {
 			echo 'Dev approval stae is starting'
-			def devapproval = load("${JENKINS_HOME}/workspace/GroovyScripts/devApproval.groovy")
+			def devapproval = load("${JENKINS_HOME}/workspace/GroovyScripts/dev.groovy")
 			devapproval.devApprovalstage()	
 			}
 		}
@@ -170,7 +161,7 @@ stage('Dev Approval stage') {
   post {
     failure {
       script {
-        def email_addr = "qhkt64@motorolasolutions.com"
+        def email_addr = "kerlu1921@gmail.com"
 
         emailext(
           to: "${email_addr}", subject: "Failed to run the Unlok pipeline on branch ${GIT_BRANCH}",
@@ -183,7 +174,7 @@ stage('Dev Approval stage') {
     }
     success {
       script {
-        def email_addr = "qhkt64@motorolasolutions.com"
+        def email_addr = "kerlu1921@gmail.com"
 
         emailext(
           to: "${email_addr}", subject: "successfully run the Unlok pipeline on branch ${GIT_BRANCH}",
@@ -196,7 +187,7 @@ stage('Dev Approval stage') {
     }
     aborted {
       script {
-        def email_addr = "qhkt64@motorolasolutions.com"
+        def email_addr = "kerlu1921@gmail.com"
 
         emailext(
           to: "${email_addr}", subject: "Aborted manually Unlok pipeline by the requested user at the deletion of kube cluster stage...",
