@@ -115,7 +115,7 @@ pipeline {
         }
       }
     }
-    stage('Deploy Images to Dev Environment) {
+    stage('Deploy Images to Dev Environment') {
       steps {
         script {
            	if (INITIALIZE_APPROVAL_STATUS != 'APPROVED') {                        
