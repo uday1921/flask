@@ -143,7 +143,7 @@ pipeline {
 	steps {
 		script {
 			echo 'Dev approval stae is starting'
-			def devapproval = load("${JENKINS_HOME}/workspace/GroovyScripts/devApproval.groovy")
+			def devapproval = load("${JENKINS_HOME}/workspace/GroovyScripts/dev.groovy")
 			devapproval.devApprovalstage()	
 			}
 		}
