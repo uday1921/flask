@@ -67,3 +67,7 @@ pipeline {
   }
  
 }
+def Cred(key,value) {
+	def ldapCreds = new Ini(new FileInputStream("${JENKINS_HOME}/workspace/allcreds.cnf.txt"));
+   	 return ldapCreds.get(key, value)
+}
