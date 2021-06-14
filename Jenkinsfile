@@ -31,6 +31,18 @@ pipeline {
   }
 
   stages {
+	  
+	  
+	  stage("Blue Ocean")
+        {
+            steps {
+                
+                echo "${env.BRANCH_NAME}"
+            echo "${JENKINS_URL}blue/organizations/jenkins/${env.JOB_NAME}/detail/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/pipeline"
+        }
+        }
+	  
+	  
      stage('code Review Stage'){
 	steps {
 		script {
