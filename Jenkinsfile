@@ -51,6 +51,7 @@ pipeline {
 				script {
 					echo "code review stage is aborted by ${USER_INFO}"
 					CODE_REVIEW_APPROVAL_STATUS='ABORTED'
+					currentBuild.result='ABORTED'
 					echo "${CODE_REVIEW_APPROVAL_STATUS}"
 					echo "Aborted pipeline build at code review stage"
 					}
