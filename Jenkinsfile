@@ -26,7 +26,7 @@ pipeline {
     FINAL_APPROVAL_STATUS = 'status'
     CODE_REVIEW_APPROVAL_STATUS='status'
     LDAP_URL = Cred("ldap","url").toString().trim()
-    userinfo="null"
+    USER_INFO='null'
     
   }
 
