@@ -96,9 +96,50 @@ pipeline {
       }
     }
 	 
+	   stage('creation of Images') {
+      steps {
+        script {
+          echo "creating images."
+          echo "images creation is done."
+        }
+      }
+    }
+    stage('Tagging Images to repository.') {
+      steps {
+        script {
+          echo "Tagging Images to repository."
+         
+          echo "Tagging Images is Done."
+        }
+      }
+    }
+    stage('pushing images to jfrog') {
+      steps {
+        script {
+          echo "pushing images to Jfrog Artifactory."
+          echo "Pushing images to Artifactory Done."
+        }
+      }
+    }
+	  
+	stage('Deploy Images to Dev Environment) {
+      steps {
+        script {
+           	if (INITIALIZE_APPROVAL_STATUS != 'APPROVED') {                        
+		echo "intialization approval stage is not approved hence images not deployed to Dev environment"
+		}
+	else {
+		echo "Deploy in dev and  environment.."
+		}
+        }
+
+      }
+    }
 	  
 	  
-	 stage('Dev Approval stage') {
+	  
+	  
+	  stage('Dev Approval stage') {
 	steps {
 		script {
 			echo 'Dev approval stae is starting'
