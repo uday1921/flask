@@ -49,7 +49,7 @@ pipeline {
 				}
 			aborted {
 				script {
-					echo "code review stage is aborted by ${userinfo}"
+					echo "code review stage is aborted by ${USER_INFO}"
 					CODE_REVIEW_APPROVAL_STATUS='ABORTED'
 					echo "${CODE_REVIEW_APPROVAL_STATUS}"
 					echo "Aborted pipeline build at code review stage"
@@ -57,7 +57,7 @@ pipeline {
 				}
 			success {
 				script {
-					 echo "code review  stage is approved by ${userinfo}"
+					 echo "code review  stage is approved by ${USER_INFO}"
            					  CODE_REVIEW_APPROVAL_STATUS  = 'APPROVED'
 						echo "${CODE_REVIEW_APPROVAL_STATUS}"
 					}
