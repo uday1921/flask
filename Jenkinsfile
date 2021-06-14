@@ -55,6 +55,9 @@ pipeline {
 				}
 			aborted {
 				script {
+					 wrap([$class: 'BuildUser']) {
+         					 echo "${BUILD_USER}"'
+       					 }
 					echo "code review stage is aborted by ${USER_INFO}"
 					CODE_REVIEW_APPROVAL_STATUS='ABORTED'
 					echo "${CODE_REVIEW_APPROVAL_STATUS}"
