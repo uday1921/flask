@@ -39,8 +39,8 @@ pipeline {
 			echo "${ADMINGROUP}"
 			echo "${BITBUCKET_URL}"
 			echo "code review stage is starting"
-			def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/code.groovy")
-			codereview.codereviewstage()	
+			//def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/code.groovy")
+			//codereview.codereviewstage()	
 			}
 		}
 		post {
