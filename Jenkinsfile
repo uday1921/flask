@@ -64,58 +64,6 @@ pipeline {
 			}
 	}
     
-   x
   }
-  post {
-    failure {
-      script {
-        def email_addr = "kerlu1921@gmail.com"
-
-        emailext(
-          to: "${email_addr}", subject: "Failed to run the Unlok pipeline on branch ${GIT_BRANCH}",
-          body: "Please Check the build job at ${BUILD_URL} ",
-          recipientProviders: [
-            [$class: 'DevelopersRecipientProvider']
-          ]
-        )
-      }
-    }
-    success {
-      script {
-        def email_addr = "kerlu1921@gmail.com"
-
-        emailext(
-          to: "${email_addr}", subject: "successfully run the Unlok pipeline on branch ${GIT_BRANCH}",
-          body: "Please Check the build job at ${BUILD_URL} ",
-          recipientProviders: [
-            [$class: 'DevelopersRecipientProvider']
-          ]
-        )
-      }
-    }
-    aborted {
-      script {
-        def email_addr = "kerlu1921@gmail.com"
-
-        emailext(
-          to: "${email_addr}", subject: "Aborted manually Unlok pipeline by the requested user at the deletion of kube cluster stage...",
-          body: "Please Check the build job at ${BUILD_URL} ",
-          recipientProviders: [
-            [$class: 'DevelopersRecipientProvider']
-          ]
-        )
-      }
-    }
-    changed {
-      echo 'Things were different before...'
-    }
-    always {
-      echo "cleaning up workspace."
-      deleteDir()
-    }
-  }
-}
-def Cred(key,value){
-    def ldapCreds = new Ini(new FileInputStream("${JENKINS_HOME}/workspace/allcreds.cnf.txt"));
-    return ldapCreds.get(key, value)
+ 
 }
