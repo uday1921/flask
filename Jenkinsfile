@@ -33,14 +33,7 @@ pipeline {
   stages {
 	  
 	  
-	  stage("Blue Ocean")
-        {
-            steps {
-                
-                echo "${env.BRANCH_NAME}"
-            echo "${JENKINS_URL}blue/organizations/jenkins/${env.JOB_NAME}/detail/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/pipeline"
-        }
-        }
+	
 	  
 	  
      stage('code Review Stage'){
@@ -50,6 +43,7 @@ pipeline {
 			echo "${DEVELOPERGRP}"
 			echo "${ADMINGROUP}"
 			echo "${BITBUCKET_URL}"
+			echo "${JENKINS_URL}blue/organizations/jenkins/${env.JOB_NAME}/detail/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/pipeline"
 			echo "code review stage is starting"
 			def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/code.groovy")
 			codereview.codereviewstage()	
@@ -64,6 +58,7 @@ pipeline {
 					echo "code review stage is aborted by ${USER_INFO}"
 					CODE_REVIEW_APPROVAL_STATUS='ABORTED'
 					echo "${CODE_REVIEW_APPROVAL_STATUS}"
+					currentBuild.result = 'ABORTED'
 					echo "Aborted pipeline build at code review stage"
 					}
 				}
