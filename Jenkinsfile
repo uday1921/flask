@@ -39,8 +39,8 @@ pipeline {
 			echo "${ADMINGROUP}"
 			echo "${BITBUCKET_URL}"
 			echo "code review stage is starting"
-			//def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/code.groovy")
-			//codereview.codereviewstage()	
+			def codereview = load("${JENKINS_HOME}/workspace/GroovyScripts/code.groovy")
+			codereview.codereviewstage()	
 			}
 		}
 		post {
@@ -51,6 +51,7 @@ pipeline {
 				script {
 					echo "code review stage is aborted by ${userinfo}"
 					CODE_REVIEW_APPROVAL_STATUS='ABORTED'
+					echo "${CODE_REVIEW_APPROVAL_STATUS}"
 					echo "Aborted pipeline build at code review stage"
 					}
 				}
@@ -58,6 +59,7 @@ pipeline {
 				script {
 					 echo "code review  stage is approved by ${userinfo}"
            					  CODE_REVIEW_APPROVAL_STATUS  = 'APPROVED'
+						echo "${CODE_REVIEW_APPROVAL_STATUS}"
 					}
 				}
 
