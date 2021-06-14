@@ -82,17 +82,51 @@ pipeline {
           script {
             echo "Intialization stage is aborted by ${USER_INFO}"
             INITIALIZE_APPROVAL_STATUS  = 'ABORTED'
-            echo "Aborted pipeline build at intialization stage"
+		  echo "${INITIALIZE_APPROVAL_STATUS}"
+            	  echo "Aborted pipeline build at intialization stage"
           }
         }
         success {
           script {
             echo "intialization stage is approved by ${USER_INFO}"
             INITIALIZE_APPROVAL_STATUS  = 'APPROVED'
+	    echo "${INITIALIZE_APPROVAL_STATUS}"
           }
         }
       }
     }
+	 
+	  
+	  
+	 stage('Dev Approval stage') {
+	steps {
+		script {
+			echo 'Dev approval stae is starting'
+			def devapproval = load("${JENKINS_HOME}/workspace/GroovyScripts/devApproval.groovy")
+			devapproval.devApprovalstage()	
+			}
+		}
+		post {
+			always {
+				echo"completed DEV approval process post"
+				}
+			aborted {
+				script {
+					echo "DEV approval stage is aborted by ${USER_INFO}"
+					DEV_APPROVAL_STATUS  = 'ABORTED'
+                 			echo "Aborted pipeline build at DEV Approval stage"
+					}
+				}
+			success {
+				script {
+					 echo "DEV approval stage is approved by ${USER_INFO}."
+                 					 DEV_APPROVAL_STATUS  = 'APPROVED'
+                  					echo "Completed DEV approval stage"
+					}
+				}
+			}
+
+}
     
   }
  
