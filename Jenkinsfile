@@ -66,7 +66,33 @@ pipeline {
 			}
 	}
 	 
-	
+	stage("Initialization Stage") {
+      steps {
+        script {
+          echo "Initialization stage is starting."
+          def Intialization = load("${JENKINS_HOME}/workspace/GroovyScripts/init.groovy")
+           Intialization.intializationstage()
+        }
+      }
+      post {
+        always {
+          echo "completed intialization process.."
+        }
+        aborted {
+          script {
+            echo "Intialization stage is aborted by ${USER_INFO}"
+            INITIALIZE_APPROVAL_STATUS  = 'ABORTED'
+            echo "Aborted pipeline build at intialization stage"
+          }
+        }
+        success {
+          script {
+            echo "intialization stage is approved by ${USER_INFO}"
+            INITIALIZE_APPROVAL_STATUS  = 'APPROVED'
+          }
+        }
+      }
+    }
     
   }
  
